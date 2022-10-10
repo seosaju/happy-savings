@@ -1,0 +1,17 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    database: h2
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+  datasource:
+    username: sa
+    url: jdbc:h2:mem:happy_savings
+    driver-class-name: org.h2.Driver
+    password:
