@@ -1,4 +1,4 @@
-package seosaju.happysavings.module.user.domain;
+package seosaju.happysavings.module.member.domain;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User {
+public class Member {
 
     @Id
     private String id;
@@ -24,7 +24,7 @@ public class User {
     private String email;
 
     @Builder
-    public User(String name, String email) {
+    public Member(String name, String email) {
         this.id = UUID.randomUUID().toString();
         changeName(name);
         this.email = email;
