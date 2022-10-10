@@ -5,7 +5,6 @@ import java.util.Optional;
 
 public interface StorageRepository {
 
-    Optional<Storage> findByUserIdAndCreationTimeBetween(String userId, Instant beginTime, Instant endTime);
-
+    Optional<Storage> findByOwnerIdAndCreationTimeBetween(String ownerId, Instant beginTime, Instant endTime);
     Storage save(Storage storage);
 }
