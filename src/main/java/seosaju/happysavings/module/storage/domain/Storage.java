@@ -32,12 +32,12 @@ public class Storage {
 
     @Builder
     public Storage(String name, Member owner) {
-        setName(name);
+        changeName(name);
         this.owner = owner;
         this.opened = false;
     }
 
-    void setName(String name) {
+    public void changeName(String name) {
         if (name.length() > 100) {
             throw new IllegalArgumentException("저장소의 이름은 100자를 넘을 수 없습니다.");
         }

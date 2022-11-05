@@ -33,7 +33,7 @@ public class TestStorageService implements StorageService {
 
         storageRepository.findByOwnerIdAndCreationTimeBetween(memberId, beginTime, endTime)
                 .ifPresent(storage -> {
-                    throw new IllegalStateException("올해애 이미 생성한 저장소가 있습니다.");
+                    throw new IllegalStateException("올해 이미 생성한 저장소가 있습니다.");
                 });
 
         Storage storage = Storage.builder()
@@ -50,12 +50,17 @@ public class TestStorageService implements StorageService {
     @Transactional
     public void changeName(long storageId, String name) {
 
+        Storage storage = storageRepository.findById(storageId).orElseThrow();
 
+        storage.changeName(name);
     }
 
     @Override
     @Transactional
     public void remove(long storageId) {
 
+        Storage storage = storageRepository.findById(storageId).orElseThrow();
+
+        storageRepository.delete(storage);
     }
 }
