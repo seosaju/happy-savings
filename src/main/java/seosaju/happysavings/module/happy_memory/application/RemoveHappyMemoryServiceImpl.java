@@ -8,6 +8,7 @@ import seosaju.happysavings.module.happy_memory.domain.HappyMemoryRepository;
 import seosaju.happysavings.module.storage.domain.Storage;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -16,12 +17,11 @@ public class RemoveHappyMemoryServiceImpl implements RemoveHappyMemoryService {
 
     private final HappyMemoryRepository happyMemoryRepository;
 
-
     @Override
     public void removeInStorage(Storage storage) {
 
         List<HappyMemory> memories = happyMemoryRepository.findAllByStorageId(storage.getId());
 
-        happyMemoryRepository.deleteAll(memories);
+        happyMemoryRepository.deleteAllById(memories.stream().map(HappyMemory::getId).collect(Collectors.toList()));
     }
 }

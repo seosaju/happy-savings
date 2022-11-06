@@ -11,5 +11,5 @@ public interface HappyMemoryRepository {
 
     Optional<HappyMemory> findById(long happyMemoryId);
 
-    void deleteAll(List<HappyMemory> memories);
+    void deleteAllById(Iterable<? extends Long> memoryIds);
 }
