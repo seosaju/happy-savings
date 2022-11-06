@@ -38,7 +38,7 @@ public class Member implements UserDetails {
     @CreationTimestamp
     private Instant creationTime;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Storage> storages;
 
     @Builder
