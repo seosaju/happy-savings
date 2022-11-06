@@ -1,6 +1,7 @@
 package seosaju.happysavings.module.storage.domain;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 public interface StorageRepository {
@@ -12,4 +13,6 @@ public interface StorageRepository {
     Optional<Storage> findById(long storageId);
 
     void delete(Storage storage);
+
+    List<Storage> findByOwnerId(String ownerId);
 }

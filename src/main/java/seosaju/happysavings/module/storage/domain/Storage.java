@@ -5,10 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import seosaju.happysavings.module.happy_memory.domain.HappyMemory;
 import seosaju.happysavings.module.member.domain.Member;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +27,9 @@ public class Storage {
     @JoinColumn(name = "owner_id")
     private Member owner;
 
+    @OneToMany(mappedBy = "storage", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<HappyMemory> memories;
+
     private boolean opened;
 
     @CreationTimestamp
@@ -39,9 +44,17 @@ public class Storage {
 
     public void changeName(String name) {
         if (name.length() > 100) {
-            throw new IllegalArgumentException("저장소의 이름은 100자를 넘을 수 없습니다.");
+            throw new IllegalArgumentException("보관함의 이름은 100자를 넘을 수 없습니다.");
         }
 
         this.name = name;
+    }
+
+    public void open() {
+        if (this.opened) {
+            throw new IllegalStateException("이미 열려있는 보관함입니다.");
+        }
+
+        this.opened = true;
     }
 }

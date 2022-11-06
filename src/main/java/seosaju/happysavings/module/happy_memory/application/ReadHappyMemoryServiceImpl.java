@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import seosaju.happysavings.module.happy_memory.domain.HappyMemory;
 import seosaju.happysavings.module.happy_memory.domain.HappyMemoryRepository;
+import seosaju.happysavings.module.storage.domain.Storage;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,8 +24,8 @@ public class ReadHappyMemoryServiceImpl implements ReadHappyMemoryService {
     }
 
     @Override
-    public List<HappyMemory> bringBackFromStorage(long storageId) {
+    public List<HappyMemory> bringBackFromStorage(Storage storage) {
 
-        return happyMemoryRepository.findAllByStorageId(storageId);
+        return happyMemoryRepository.findAllByStorageId(storage.getId());
     }
 }

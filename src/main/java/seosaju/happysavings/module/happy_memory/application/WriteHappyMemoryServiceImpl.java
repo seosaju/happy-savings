@@ -21,18 +21,9 @@ import javax.persistence.EntityNotFoundException;
 public class WriteHappyMemoryServiceImpl implements WriteHappyMemoryService {
 
     private final HappyMemoryRepository happyMemoryRepository;
-    private final MemberRepository memberRepository;
-    private final StorageRepository storageRepository;
 
     @Override
-    public long write(HappyMemoryRequest.Write request) {
-
-        Member member = memberRepository.findById(request.getMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("No member has this ID."));
-
-        Storage storage = storageRepository.findById(request.getStorageId())
-                .orElseThrow(() -> new IllegalArgumentException("No storage has this ID "));
-
+    public long write(Member member, Storage storage, String content) {
 
         if (storage.isOpened()) {
             throw new IllegalStateException("Can't put it an already opened storage.");
@@ -41,7 +32,7 @@ public class WriteHappyMemoryServiceImpl implements WriteHappyMemoryService {
         HappyMemory memory = HappyMemory.builder()
                 .writer(member)
                 .storage(storage)
-                .contents(request.getContent())
+                .contents(content)
                 .build();
 
         memory = happyMemoryRepository.save(memory);

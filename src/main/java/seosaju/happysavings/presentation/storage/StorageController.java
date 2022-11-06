@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import seosaju.happysavings.module.storage.application.StorageService;
 import seosaju.happysavings.module.storage.application.dto.request.StorageRequest;
 
 @Slf4j
