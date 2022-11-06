@@ -14,12 +14,12 @@ public class ApplyMemberServiceImpl implements ApplyMemberService {
     private final MemberRepository memberRepository;
 
     @Override
-    public String apply(String name, String password, String email) {
+    public String apply(String username, String password, String email) {
 
         // TODO :: 인증
 
         Member member = Member.builder()
-                .name(name)
+                .username(username)
                 .password(password) // TODO :: encryptedPassword
                 .email(email)
                 .build();
