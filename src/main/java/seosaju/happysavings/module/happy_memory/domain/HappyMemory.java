@@ -1,4 +1,4 @@
-package seosaju.happysavings.module.paper.domain;
+package seosaju.happysavings.module.happy_memory.domain;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -14,16 +14,18 @@ import java.time.Instant;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Paper {
+public class HappyMemory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
     private Member writer;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storage_id")
     private Storage storage;
 
     private String contents;
@@ -32,7 +34,7 @@ public class Paper {
     private Instant creationTime;
 
     @Builder
-    public Paper(Member writer, Storage storage, String contents) {
+    public HappyMemory(Member writer, Storage storage, String contents) {
         this.writer = writer;
         this.storage = storage;
         writeContents(contents);
