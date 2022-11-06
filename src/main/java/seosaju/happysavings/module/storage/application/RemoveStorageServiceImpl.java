@@ -16,10 +16,6 @@ public class RemoveStorageServiceImpl implements RemoveStorageService {
     @Override
     public void remove(Storage storage) {
 
-        if (storage.getMemories().size() > 0) {
-            throw new IllegalStateException("Can't delete storage when memories exist.");
-        }
-
         storageRepository.delete(storage);
     }
 }

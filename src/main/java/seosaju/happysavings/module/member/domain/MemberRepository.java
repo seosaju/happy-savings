@@ -9,4 +9,6 @@ public interface MemberRepository {
     Optional<Member> findById(String id);
 
     Member save(Member member);
+
+    void delete(Member member);
 }
