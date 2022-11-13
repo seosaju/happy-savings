@@ -8,13 +8,14 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
-import seosaju.happysavings.module.storage.domain.Storage;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import java.time.Instant;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -37,9 +38,6 @@ public class Member implements UserDetails {
 
     @CreationTimestamp
     private Instant creationTime;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<Storage> storages;
 
     @Builder
     public Member(String username, String password, String email) {

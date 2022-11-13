@@ -4,15 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import seosaju.happysavings.module.happy_memory.application.dto.request.HappyMemoryRequest;
 import seosaju.happysavings.module.happy_memory.domain.HappyMemory;
 import seosaju.happysavings.module.happy_memory.domain.HappyMemoryRepository;
 import seosaju.happysavings.module.member.domain.Member;
-import seosaju.happysavings.module.member.domain.MemberRepository;
 import seosaju.happysavings.module.storage.domain.Storage;
-import seosaju.happysavings.module.storage.domain.StorageRepository;
-
-import javax.persistence.EntityNotFoundException;
 
 @Slf4j
 @Service
