@@ -1,9 +1,9 @@
 package seosaju.happysavings.infra.config;
 
-import io.jsonwebtoken.Jwt;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -28,8 +28,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.cors().disable();
+//        http.cors().disable();
         http.csrf().disable();
+
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests()
+                .mvcMatchers(HttpMethod.OPTIONS).permitAll()
+                .antMatchers(HttpMethod.POST, "/member").permitAll()
+                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/**").authenticated();
+//                .antMatchers("/**").access("hasRole('USER') or hasRole('ADMIN')");
 
         http.exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint);
@@ -37,14 +45,8 @@ public class SecurityConfig {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
         http.formLogin().disable();
         http.headers().frameOptions().disable();
-
-        http.authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
-                .antMatchers("/**").access("hasRole('USER') or hasRole('ADMIN')");
 
         return http.build();
     }
